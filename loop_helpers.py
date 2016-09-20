@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from numba import jit
 
-from monte_carlo_utils import random_sample
+from NucFrames.monte_carlo_utils import random_sample
 
 def read_loop_frame(loop_file):
   """
@@ -50,13 +50,16 @@ def row_liftover(row, chr_col, col, lo):
 ##############################################################################
 # Monte Carlo stuff
 ##############################################################################
-def monte_carlo(dists_count, seps, loop_total, idx_a, idx_b, B=100000, plot=False):
+def monte_carlo(dists_count, seps, loop_total, idx_a, idx_b, B=100000, plot=False, n_cells=None):
   """
   Only on cis (obviously), assume square matrix.
   """
   max_idx = dists_count.shape[0] - 1
 
-  potential_max = len(seps) * 24
+  if n_cells is None:
+    n_cells = np.max(dists_count)
+
+  potential_max = len(seps) * n_cells
 
   sample_starts, sample_ends = random_sample(seps, max_idx, B)
   #sample_starts, sample_ends = sanity_check(idx_a, idx_b, max_idx, B)
@@ -69,14 +72,14 @@ def monte_carlo(dists_count, seps, loop_total, idx_a, idx_b, B=100000, plot=Fals
             np.max(sample_sums), loop_total, potential_max))
 
     sns.distplot(sample_sums, kde=False, norm_hist=False)
-    plt.axvline(loop_total)
+    plt.axvline(loop_total, label="loop total")
+    plt.legend()
     plt.show()
 
   pval = (1 + truth_count) / (1 + B)
   return(truth_count, pval)
 
 def mk_sum(dists_count, sample_starts, sample_ends, plot=False):
-  # sample_values = np.zeros((sample_starts.shape[0]), dtype=np.int32)
   sample_values = np.zeros_like(sample_starts)
   _mk_sum(dists_count, sample_values, sample_starts, sample_ends)
   highest = np.sum(np.max(sample_values, axis=0))
@@ -84,8 +87,8 @@ def mk_sum(dists_count, sample_starts, sample_ends, plot=False):
   if plot:
     print("Highest possible sum from sampling: {}".format(highest))
     print("Lowest possible sum from sampling: {}".format(lowest))
-    plt.axvline(highest, color='r')
-    plt.axvline(lowest, color='r')
+    plt.axvline(highest, color='r', label="Highest possible from sampling")
+    plt.axvline(lowest, color='r', label="Lowest possible from sampling")
 
   return(np.sum(sample_values, axis=1))
 
