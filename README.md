@@ -1,4 +1,4 @@
-# Single Cell Structure Analysis
+# Single Cell Loop Analysis
 
 Contains jupyter notebooks analysing single cell Hi-C structures. Relies on [NucFrames code](https://github.com/latkins/nuc_frames).
 
