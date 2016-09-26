@@ -16,10 +16,10 @@ conda.
 * pyliftover
 * jupyter
 
-
 ### Running
 
-Run ```jupyter notebook``` in the cloned folder, and view loop_analysis.ipynb. 
+Run ```jupyter notebook``` in the cloned folder. A web browser should open. View
+```loop_analysis.ipynb``` to view and run the analysis.
 
 ### Data Files
 
@@ -27,4 +27,7 @@ The ```.hdf5``` files required to run these scripts are availiable from GEO,
 accession number GSE80280. These files must be downloaded prior to running these
 scripts.
 
-Additionally, a file defining loop locations is required \([https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525)\).
+Additionally, a file defining loop locations is required
+\([https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525)\).
+This file was generated
+by [Rao et al.](https://www.ncbi.nlm.nih.gov/pubmed/25497547).
