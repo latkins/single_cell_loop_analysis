@@ -2,7 +2,11 @@
 
 Contains jupyter notebooks analysing single cell Hi-C structures. Relies on [NucFrames code](https://github.com/latkins/nuc_frames).
 
-The file loop_analysis.ipynb performs monte carlo analysis of CTCF/Cohesin loops.
+The file loop_analysis.ipynb performs monte carlo analysis of CTCF/Cohesin
+loops. This code aims to detect whether loop anchor points, detected
+by [Rao et al.](https://www.ncbi.nlm.nih.gov/pubmed/25497547), are seen to
+interact in 3d space, across our single cell Hi-C structures, more frequently
+than randomly selected points with the same sequence separation.
 
 ## Installation
 
